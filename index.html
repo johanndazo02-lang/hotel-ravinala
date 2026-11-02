@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <!-- Indispensable pour que le site s'affiche bien sur téléphone -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hôtel Ravinala — Nosy Be, Madagascar</title>
+  <!-- Description affichée par Google dans les résultats de recherche (SEO) -->
+  <meta name="description" content="Hôtel Ravinala, bungalows en bord de mer à Nosy Be. Plage privée, restaurant malgache, excursions vers Nosy Komba et Nosy Iranja.">
+  <!-- Site de démonstration : on demande à Google de NE PAS l'afficher dans ses résultats -->
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="style.css">
+</head>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<body>
+
+  <!-- ===== BANDEAU DE DÉMONSTRATION : l'hôtel est fictif ===== -->
+  <div class="bandeau-demo">
+    Site de démonstration — l'Hôtel Ravinala est fictif. Réalisé par <strong>Johann DAZO</strong>, développeur web.
+  </div>
+
+  <!-- ===== EN-TÊTE ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#accueil" class="logo">Ravinala<span>.</span></a>
+      <!-- Bouton burger : visible seulement sur mobile.
+           Les 3 <span> sont les 3 traits du ☰ (dessinés en CSS).
+           aria-label et aria-expanded aident les lecteurs d'écran. -->
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav">
+        <a href="#apropos">L'hôtel</a>
+        <a href="#chambres">Chambres</a>
+        <a href="#services">Services</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#contact" class="btn btn-small">Réserver</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO : la grande image d'accueil ===== -->
+    <section class="hero" id="accueil">
+      <div class="hero-content">
+        <p class="hero-sub">Nosy Be · Madagascar</p>
+        <h1>Votre paradis au bord de l'océan Indien</h1>
+        <p>Bungalows face à la mer, plage privée et cuisine malgache authentique.</p>
+        <a href="#chambres" class="btn">Voir nos chambres</a>
+      </div>
+    </section>
+
+    <!-- ===== À PROPOS ===== -->
+    <section class="section" id="apropos">
+      <div class="container apropos">
+        <div class="apropos-texte">
+          <h2>Bienvenue à l'Hôtel Ravinala</h2>
+          <p>
+            Situé sur la plage d'Ambatoloaka, notre hôtel familial vous accueille
+            depuis 2012 dans un cadre naturel préservé. Le ravinala, « l'arbre du
+            voyageur », est le symbole de Madagascar : comme lui, nous offrons
+            fraîcheur et repos à tous ceux qui passent.
+          </p>
+          <ul class="chiffres">
+            <li><strong>12</strong> bungalows</li>
+            <li><strong>50 m</strong> de la plage</li>
+            <li><strong>4,8/5</strong> avis clients</li>
+          </ul>
+        </div>
+        <div class="apropos-photo" role="img" aria-label="Vue de l'hôtel"></div>
+      </div>
+    </section>
+
+    <!-- ===== CHAMBRES ===== -->
+    <section class="section section-claire" id="chambres">
+      <div class="container">
+        <h2 class="titre-centre">Nos chambres</h2>
+        <div class="grille-chambres">
+
+          <article class="carte">
+            <div class="carte-photo photo-1"></div>
+            <div class="carte-texte">
+              <h3>Bungalow Jardin</h3>
+              <p>Au cœur du jardin tropical, idéal pour 2 personnes.</p>
+              <p class="prix">À partir de <strong>150 000 Ar</strong> / nuit</p>
+            </div>
+          </article>
+
+          <article class="carte">
+            <div class="carte-photo photo-2"></div>
+            <div class="carte-texte">
+              <h3>Bungalow Vue Mer</h3>
+              <p>Terrasse privée face au coucher de soleil.</p>
+              <p class="prix">À partir de <strong>220 000 Ar</strong> / nuit</p>
+            </div>
+          </article>
+
+          <article class="carte">
+            <div class="carte-photo photo-3"></div>
+            <div class="carte-texte">
+              <h3>Suite Famille</h3>
+              <p>Deux chambres et un salon, jusqu'à 5 personnes.</p>
+              <p class="prix">À partir de <strong>350 000 Ar</strong> / nuit</p>
+            </div>
+          </article>
+
+          <article class="carte">
+            <div class="carte-photo photo-4"></div>
+            <div class="carte-texte">
+              <h3> Suite avec jacuzzi privé et vue panoramique sur la baie</h3>
+              <p>Deux chambres et un salon, jusqu'à 5 personnes.</p>
+              <p class="prix">À partir de <strong>450 000 Ar</strong> / nuit</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="titre-centre">Nos services</h2>
+        <div class="grille-services">
+          <div class="service"><span class="icone">🏖️</span><h3>Plage privée</h3><p>Transats et serviettes offerts.</p></div>
+          <div class="service"><span class="icone">🍲</span><h3>Restaurant</h3><p>Romazava, poissons grillés et fruits de mer.</p></div>
+          <div class="service"><span class="icone">⛵</span><h3>Excursions</h3><p>Nosy Komba, Nosy Iranja, Lokobe.</p></div>
+          <div class="service"><span class="icone">✈️</span><h3>Navette aéroport</h3><p>Transfert depuis Fascène sur demande.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALERIE ===== -->
+    <section class="section section-claire" id="galerie">
+      <div class="container">
+        <h2 class="titre-centre">Galerie</h2>
+        <div class="grille-galerie">
+          <img src="images/galerie-1.jpg" alt="Bungalow avec terrasse face à la mer" loading="lazy">
+          <img src="images/galerie-2.jpg" alt="Plage privée avec transats" loading="lazy">
+          <img src="images/galerie-3.jpg" alt="Restaurant avec vue sur la mer" loading="lazy">
+          <img src="images/galerie-4.jpg" alt="Excursion en bateau vers Nosy Komba" loading="lazy">
+          <img src="images/galerie-5.jpg" alt="Coucher de soleil sur la baie" loading="lazy">
+          <img src="images/galerie-6.jpg" alt="Piscine entourée de palmiers" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section section-sombre" id="contact">
+      <div class="container contact">
+        <div>
+          <h2>Réservez votre séjour</h2>
+          <p>📍 Plage d'Ambatoloaka, Nosy Be</p>
+          <p>📞 +261 32 00 000 00 <em>(numéro d'exemple)</em></p>
+          <p>✉️ contact@hotel-ravinala.mg <em>(adresse d'exemple)</em></p>
+
+          <!-- wa.me = lien WhatsApp. Le numéro s'écrit sans "+" ni espaces. -->
+          <a href="https://wa.me/261320000000" class="btn btn-whatsapp" target="_blank" rel="noopener">Écrire sur WhatsApp</a>
+
+          <!-- Carte Google Maps -->
+          <iframe
+            class="carte-maps"
+            src="https://www.google.com/maps?q=Ambatoloaka,Nosy+Be,Madagascar&output=embed"
+            title="Carte : Hôtel Ravinala à Ambatoloaka, Nosy Be"
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <form class="formulaire" novalidate>
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom">
+          <p class="erreur" id="erreur-nom"></p>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+          <p class="erreur" id="erreur-email"></p>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+          <p class="erreur" id="erreur-message"></p>
+
+          <button type="submit" class="btn">Envoyer</button>
+          <p class="formulaire-message"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== VISIONNEUSE : cachée par défaut, affichée par le JS ===== -->
+  <div class="visionneuse">
+    <button class="visionneuse-fermer" aria-label="Fermer">✕</button>
+    <img class="visionneuse-image" alt="">
+  </div>
+
+  <footer class="footer">
+    <!-- 3 colonnes (Grid) : présentation, navigation, infos pratiques -->
+    <div class="container footer-grille">
+      <div>
+        <p class="logo">Ravinala<span>.</span></p>
+        <p>Bungalows en bord de mer à Nosy Be, Madagascar.</p>
+      </div>
+
+      <div>
+        <h3>Navigation</h3>
+        <ul class="footer-liens">
+          <li><a href="#apropos">L'hôtel</a></li>
+          <li><a href="#chambres">Chambres</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Infos pratiques</h3>
+        <ul class="footer-liens">
+          <li>Arrivée : à partir de 14h</li>
+          <li>Départ : avant 11h</li>
+          <li>Réception ouverte 24h/24</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer-copyright">© 2026 Hôtel Ravinala — Nosy Be, Madagascar</p>
+  </footer>
+
+  <!-- Le script est placé à la fin : le HTML est déjà chargé quand il s'exécute -->
+  <script src="script.js"></script>
+</body>
+</html>

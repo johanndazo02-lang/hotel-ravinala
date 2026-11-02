@@ -1,0 +1,618 @@
+/* =========================================================
+   1. VARIABLES CSS
+   On définit les couleurs une seule fois ici.
+   Pour changer tout le thème du site, il suffit de modifier
+   ces lignes. Utilisation : color: var(--couleur-principale);
+   ========================================================= */
+:root {
+  --couleur-principale: #0f766e;  /* vert lagon */
+  --couleur-accent: #f59e0b;      /* orange coucher de soleil */
+  --couleur-texte: #1f2937;
+  --couleur-fond-clair: #f5f1e8;  /* sable */
+  --couleur-sombre: #0b3b3a;
+  --rayon: 12px;                  /* arrondi des coins */
+  --largeur-max: 1100px;
+}
+
+/* =========================================================
+   2. RÉINITIALISATION DE BASE
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box = la largeur inclut le padding et la bordure.
+     Sans ça, width: 100% + padding déborde de l'écran. */
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;  /* défilement fluide quand on clique sur un lien #ancre */
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--couleur-texte);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* .container centre le contenu et limite sa largeur sur grand écran */
+.container {
+  width: 100%;
+  max-width: var(--largeur-max);
+  margin: 0 auto;      /* auto à gauche et à droite = centré */
+  padding: 0 20px;
+}
+
+/* Bandeau "site de démonstration", tout en haut de la page.
+   Il n'est pas sticky : il disparaît quand on fait défiler,
+   l'en-tête prend alors sa place en haut de l'écran. */
+.bandeau-demo {
+  background: var(--couleur-accent);
+  color: var(--couleur-texte);
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+}
+
+/* =========================================================
+   3. BOUTONS
+   ========================================================= */
+.btn {
+  display: inline-block;
+  font-family: inherit;
+  background: var(--couleur-accent);
+  color: #fff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 999px;   /* très grand arrondi = forme "pilule" */
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;  /* animation douce */
+}
+
+/* :hover = quand la souris passe dessus */
+.btn:hover {
+  background: #d97706;
+  transform: translateY(-2px);  /* le bouton monte de 2 pixels */
+}
+
+.btn-small {
+  padding: 8px 18px;
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  margin-top: 16px;
+}
+
+.btn-whatsapp:hover {
+  background: #1da851;
+}
+
+/* =========================================================
+   4. EN-TÊTE — FLEXBOX
+   display: flex aligne les enfants sur une ligne.
+   justify-content: space-between = logo à gauche, menu à droite.
+   align-items: center = centrés verticalement.
+   ========================================================= */
+.header {
+  position: sticky;   /* l'en-tête reste collé en haut quand on défile */
+  top: 0;
+  z-index: 10;        /* passe au-dessus du reste de la page */
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;    /* sur petit écran, le menu passe à la ligne */
+  gap: 10px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--couleur-principale);
+}
+
+.logo span {
+  color: var(--couleur-accent);
+}
+
+/* --- MENU SUR MOBILE (mobile d'abord) ---
+   Le menu est caché (display: none).
+   width: 100% + le flex-wrap du parent = il passe SOUS le logo.
+   flex-direction: column = les liens s'empilent verticalement. */
+.nav {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+/* Quand le JS ajoute la classe "ouvert", le menu apparaît */
+.nav.ouvert {
+  display: flex;
+}
+
+/* --- LE BOUTON BURGER ☰ ---
+   C'est un flex en colonne : les 3 traits sont empilés,
+   avec 5px d'espace entre eux. */
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.burger span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--couleur-texte);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Menu ouvert : les 3 traits se transforment en croix ✕
+   nth-child(1) = le 1er trait, nth-child(2) = le 2e, etc.
+   8px = hauteur d'un trait (3px) + l'espace (5px) */
+.burger.ouvert span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger.ouvert span:nth-child(2) {
+  opacity: 0;   /* le trait du milieu disparaît */
+}
+
+.burger.ouvert span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.nav a:not(.btn):hover {
+  color: var(--couleur-principale);
+}
+
+/* =========================================================
+   5. HERO
+   Plusieurs couches de fond : un dégradé sombre par-dessus
+   la photo (pour que le texte blanc reste lisible), puis une
+   couleur de secours si la photo n'existe pas encore.
+   ========================================================= */
+.hero {
+  min-height: 85vh;   /* vh = % de la hauteur de l'écran */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  padding: 60px 20px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("images/hero.jpg") center / cover no-repeat,
+    var(--couleur-principale);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero-sub {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.9rem;
+  color: var(--couleur-accent);
+  font-weight: 700;
+}
+
+.hero h1 {
+  /* clamp(min, idéal, max) : la taille s'adapte à l'écran */
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin: 12px 0 16px;
+}
+
+.hero p {
+  margin-bottom: 28px;
+  font-size: 1.15rem;
+}
+
+/* =========================================================
+   6. SECTIONS
+   ========================================================= */
+.section {
+  padding: 80px 0;
+  scroll-margin-top: 80px;   /* pour que l'ancre ne soit pas cachée par le header */
+}
+
+.section-claire {
+  background: var(--couleur-fond-clair);
+}
+
+.section-sombre {
+  background: var(--couleur-sombre);
+  color: #fff;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--couleur-principale);
+}
+
+.section-sombre h2 {
+  color: #fff;
+}
+
+.titre-centre {
+  text-align: center;
+  margin-bottom: 40px !important;
+}
+
+/* =========================================================
+   7. À PROPOS — GRID
+   Mobile d'abord : une seule colonne.
+   La version 2 colonnes est dans le @media en bas du fichier.
+   ========================================================= */
+  /* Galerie sur grand écran : 3 colonnes, photos plus hautes */
+.apropos {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.chiffres {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 24px;
+}
+
+.chiffres strong {
+  display: block;
+  font-size: 1.8rem;
+  color: var(--couleur-accent);
+}
+
+.apropos-photo {
+  min-height: 320px;
+  border-radius: var(--rayon);
+  background: url("images/hotel.jpg") center / cover, #94a3b8;
+}
+
+/* =========================================================
+   8. CARTES DES CHAMBRES — GRID AUTOMATIQUE
+   repeat(auto-fit, minmax(260px, 1fr)) =
+   "mets autant de colonnes que possible, chacune au moins
+   260px". Résultat : 1 colonne sur téléphone, 3 sur ordinateur,
+   sans écrire de @media !
+   ========================================================= */
+.grille-chambres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.carte {
+  background: #fff;
+  border-radius: var(--rayon);
+  overflow: hidden;   /* coupe la photo aux coins arrondis */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+
+.carte:hover {
+  transform: translateY(-6px);
+}
+
+.carte-photo {
+  height: 200px;
+  background-color: #94a3b8;   /* gris de secours sans photo */
+  background-size: cover;
+  background-position: center;
+}
+
+.photo-1 { background-image: url("images/chambre-1.jpg"); }
+.photo-2 { background-image: url("images/chambre-2.jpg"); }
+.photo-3 { background-image: url("images/chambre-3.jpg"); }
+.photo-4 { background-image: url("images/chambre-4.jpg"); }
+
+.carte-texte {
+  padding: 20px;
+}
+
+.carte-texte h3 {
+  margin-bottom: 8px;
+}
+
+.prix {
+  margin-top: 12px;
+  color: var(--couleur-principale);
+}
+
+/* =========================================================
+   9. SERVICES
+   ========================================================= */
+.grille-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  text-align: center;
+}
+
+.service {
+  padding: 24px;
+  border-radius: var(--rayon);
+  border: 1px solid #e5e7eb;
+}
+
+.icone {
+  font-size: 2.5rem;
+}
+
+.service h3 {
+  margin: 10px 0 6px;
+}
+
+/* =========================================================
+   10. CONTACT ET FORMULAIRE
+   ========================================================= */
+.contact {
+  display: grid;
+  gap: 40px;
+}
+
+.contact p {
+  margin-bottom: 8px;
+}
+
+.contact em {
+  opacity: 0.6;
+  font-size: 0.85rem;
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;   /* les éléments s'empilent verticalement */
+  gap: 8px;
+  background: #fff;
+  color: var(--couleur-texte);
+  padding: 28px;
+  border-radius: var(--rayon);
+}
+
+.formulaire input,
+.formulaire textarea {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+  margin-bottom: 8px;
+}
+
+/* :focus = quand on clique dans le champ */
+.formulaire input:focus,
+.formulaire textarea:focus {
+  outline: 2px solid var(--couleur-principale);
+  border-color: transparent;
+}
+
+/* Message d'erreur sous un champ (vide par défaut, donc invisible) */
+.erreur {
+  color: #dc2626;           /* rouge */
+  font-size: 0.85rem;
+  margin-top: -6px;         /* rapproche le message de son champ */
+}
+
+/* Champ mal rempli : bordure rouge (classe ajoutée par le JS) */
+.formulaire .champ-invalide {
+  border-color: #dc2626;
+}
+
+/* Message de confirmation en bas du formulaire */
+.formulaire-message {
+  font-weight: 600;
+  color: var(--couleur-principale);
+}
+
+/* Message d'échec d'envoi : en rouge */
+.formulaire-message.echec {
+  color: #dc2626;
+}
+
+/* Bouton désactivé pendant l'envoi */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Carte Google Maps
+   Nom de classe UNIQUE : .carte est déjà utilisé par les chambres ! */
+.carte-maps {
+  display: block;
+  width: 100%;              /* toute la largeur de la colonne */
+  height: 250px;
+  border: 0;                /* enlève le cadre gris par défaut des iframes */
+  border-radius: var(--rayon);
+  margin-top: 24px;
+}
+
+
+
+/* =========================================================
+   11. PIED DE PAGE
+   ========================================================= */
+.footer {
+  background: #062625;
+  color: #9ca3af;           /* gris clair */
+  font-size: 0.9rem;
+  padding: 50px 0 20px;
+}
+
+/* 3 colonnes sur ordinateur, empilées sur téléphone, sans @media :
+   « autant de colonnes que possible, d'au moins 220px chacune » */
+.footer-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+/* Sur le fond sombre, le logo vert serait peu lisible : on le met en blanc */
+.footer .logo {
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.footer h3 {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.footer-liens {
+  list-style: none;         /* enlève les puces */
+  display: flex;
+  flex-direction: column;   /* les éléments s'empilent… */
+  gap: 8px;                 /* … avec 8px d'espace entre eux */
+}
+
+.footer-liens a:hover {
+  color: #fff;
+}
+
+.footer-copyright {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);  /* fine ligne de séparation */
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+/* =========================================================
+   GALERIE
+   ========================================================= */
+.grille-galerie {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 160px;    /* ← NOUVEAU : chaque ligne fait 160px */
+  gap: 12px;
+}
+
+.grille-galerie img {
+  width: 100%;
+  height: 100%;             /* ← CHANGÉ : 160px devient 100% */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.grille-galerie img:first-child {
+  grid-column: span 2;
+}
+
+/* ← NOUVEAU : la dernière photo aussi en large sur téléphone */
+.grille-galerie img:last-child {
+  grid-column: span 2;
+}
+
+/* La main qui clique apparaît sur les photos */
+.grille-galerie img {
+  cursor: pointer;
+}
+
+/* =========================================================
+   VISIONNEUSE
+   ========================================================= */
+.visionneuse {
+  position: fixed;          /* fixée à l'écran, même quand on défile */
+  inset: 0;                 /* = top: 0; right: 0; bottom: 0; left: 0 → plein écran */
+  z-index: 100;             /* au-dessus de TOUT, même de l'en-tête (z-index: 10) */
+  background: rgba(0, 0, 0, 0.85);   /* fond noir transparent à 85 % */
+  padding: 20px;
+  display: none;            /* cachée par défaut */
+  justify-content: center;  /* ces 2 lignes centrent la photo (recette Flexbox !) */
+  align-items: center;
+}
+
+/* Le JS ajoute la classe "ouverte" pour l'afficher */
+.visionneuse.ouverte {
+  display: flex;
+}
+
+.visionneuse-image {
+  max-width: 100%;          /* jamais plus large que l'écran */
+  max-height: 90vh;         /* jamais plus haute que 90 % de l'écran */
+  border-radius: 8px;
+}
+
+/* La croix en haut à droite */
+.visionneuse-fermer {
+  position: absolute;       /* placée par rapport à la visionneuse */
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   12. RESPONSIVE — MEDIA QUERY
+   Tout ce qui est ici s'applique SEULEMENT quand l'écran
+   fait au moins 768px de large (tablette, ordinateur).
+   ========================================================= */
+@media (min-width: 768px) {
+  /* Sur grand écran : plus de burger, le menu est toujours visible, en ligne */
+  .burger {
+    display: none;
+  }
+
+  .grille-galerie {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 220px;      /* lignes plus hautes sur ordinateur */
+  }
+
+  /* La 1re photo : 2 colonnes (déjà réglé plus haut) + 2 lignes */
+  .grille-galerie img:first-child {
+    grid-row: span 2;
+  }
+
+  /* La dernière photo redevient normale (1 seule case) */
+  .grille-galerie img:last-child {
+    grid-column: auto;
+  }
+
+
+  .nav {
+    display: flex;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .apropos,
+  .contact {
+    grid-template-columns: 1fr 1fr;   /* deux colonnes égales */
+  }
+}
